@@ -41,20 +41,19 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    const database = getDatabase(app); // TAMBAHAN: Initialize Realtime Database
+    const database = getDatabase(app);
 
-    // HAPUS: Tidak butuh WebSocket variables lagi
     let currentUser = null;
     const chat = document.getElementById("chat");
     const input = document.getElementById("message");
     const sendBtn = document.getElementById("sendBtn");
     const userEmailSpan = document.getElementById("userEmail");
+    const username = user.email.split('@')[0];
 
     // Monitor authentication state
     onAuthStateChanged(auth, (user) => {
       if (user) {
         currentUser = user;
-        const username = user.email.split('@')[0];
         console.log("User logged in email:", user.email);
         console.log("User logged in username:", username);
         userEmailSpan.textContent = `Halo, ${username}!`;
@@ -119,7 +118,7 @@
       div.innerHTML = `
         <div class="message-content">
           <div class="message-header">
-            <strong>${msg.userEmail}</strong>
+            <strong>${msg.username}</strong>
             <span class="timestamp">${timestamp}</span>
           </div>
           <div class="message-text">${msg.text}</div>
