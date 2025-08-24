@@ -42,6 +42,8 @@ form.addEventListener('submit', async function (event) {
     return;
   }
 
+  
+
   try {
     // Sign in with email and password
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
